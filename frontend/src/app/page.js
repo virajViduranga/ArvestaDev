@@ -1,8 +1,8 @@
 
-import Hero from "./components/Hero";
-import PopularTools from "./components/PopularTools";
-import WhyArvestaDev from "./components/WhyArvestaDev";
-import FAQ from "./components/FAQ";
+import Hero from "../components/Hero";
+import PopularTools from "../components/PopularTools";
+import WhyArvestaDev from "../components/WhyArvestaDev";
+import FAQ from "../components/FAQ";
 
 export default function Home() {
   const jsonLd = {
