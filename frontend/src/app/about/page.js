@@ -41,27 +41,35 @@ const jsonLd = {
 // ==========================================
 
 const PrincipleBlock = ({ icon: Icon, title, description }) => (
-  <div className="flex gap-4 p-6 border-l-4 border-gray-200 hover:border-[#4F73F6] transition-colors bg-white">
-    <div className="shrink-0 mt-1">
-      <Icon size={24} className="text-[#4F73F6]" />
+  <div className="group flex gap-4 p-6 border-l-4 border-[var(--color-border)] hover:border-[var(--color-primary)] bg-[var(--color-surface)] cursor-pointer transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg">
+    
+    {/* Icon Wrapper: Scales up and tilts slightly on card hover */}
+    <div className="shrink-0 mt-1 transition-transform duration-300 ease-out group-hover:scale-110 group-hover:-rotate-6">
+      <Icon size={24} className="text-[var(--color-primary)]" />
     </div>
+    
     <div>
-      <h3 className="text-lg font-bold text-gray-900 mb-2">{title}</h3>
-      <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
+      {/* Title: Changes color to your primary brand color on hover */}
+      <h3 className="text-lg font-bold text-[var(--color-text-primary)] mb-2 transition-colors duration-300 group-hover:text-[var(--color-primary)]">
+        {title}
+      </h3>
+      <p className="text-[var(--color-text-secondary)] text-md leading-relaxed">
+        {description}
+      </p>
     </div>
+    
   </div>
 );
-
 const CategoryLink = ({ title, description, href, icon: Icon }) => (
-  <Link href={href} className="group block bg-white border border-gray-200 p-6 hover:border-[#4F73F6] transition-colors">
+  <Link href={href} className="group block bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl p-6 hover:border-[var(--color-primary)] transition-colors">
     <div className="flex items-start justify-between mb-4">
-      <div className="w-10 h-10 bg-gray-50 flex items-center justify-center border border-gray-100 group-hover:bg-blue-50 group-hover:border-blue-100 transition-colors">
-        <Icon size={20} className="text-[#4F73F6]" />
+      <div className="w-10 h-10 bg-[var(--color-secondary)] flex items-center justify-center border border-[var(--color-border)] group-hover:bg-[var(--color-info-bg)] group-hover:border-[var(--color-info)] transition-colors">
+        <Icon size={20} className="text-[var(--color-primary)]" />
       </div>
-      <ArrowRight size={16} className="text-gray-400 group-hover:text-[#4F73F6] group-hover:translate-x-1 transition-all" />
+      <ArrowRight size={16} className="text-[var(--color-text-muted)] group-hover:text-[var(--color-primary)] group-hover:translate-x-1 transition-all" />
     </div>
-    <h3 className="text-md font-bold text-gray-900 mb-2 group-hover:text-[#4F73F6] transition-colors">{title}</h3>
-    <p className="text-xs text-gray-500 leading-relaxed">{description}</p>
+    <h3 className="text-md font-bold text-[var(--color-text-primary)] mb-2 group-hover:text-[var(--color-primary)] transition-colors">{title}</h3>
+    <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed">{description}</p>
   </Link>
 );
 
@@ -77,70 +85,75 @@ export default function AboutPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <main className="min-h-screen bg-gray-50 font-sans text-gray-800">
+     <main className="min-h-screen bg-[var(--color-background)] font-sans text-[var(--color-text-primary)]">
         
         {/* HERO SECTION */}
-        <section className="bg-white border-b border-gray-200 pt-20 pb-16 px-4">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
+        <section className="bg-[var(--color-surface)] border-b border-[var(--color-border)] pt-20 pb-16 px-4">
+          <div className="max-w-7xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-bold text-[var(--color-text-primary)] mb-6 tracking-tight">
               About ArvestaDev
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed border-l-4 border-[#ECBE13] pl-6 py-2">
+            <p className="text-xl md:text-2xl text-[var(--color-text-secondary)] leading-relaxed border-l-4 border-[var(--color-warning)] pl-6 py-2">
               ArvestaDev is a growing collection of fast, practical online tools designed to make everyday digital tasks simpler.
             </p>
           </div>
         </section>
 
-        <div className="max-w-4xl mx-auto px-4 py-16 space-y-24">
+        <div className="max-w-7xl mx-auto px-4 py-16 space-y-24">
           
           {/* OUR STORY & WHAT IS IT (Editorial Layout) */}
           <div className="grid md:grid-cols-2 gap-12 md:gap-8">
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-                <Layers className="text-[#4F73F6]" /> Our Story
+              <h2 className="text-2xl font-bold text-[var(--color-text-primary)] mb-6 flex items-center gap-3">
+                <Layers className="text-[var(--color-primary)]" /> Our Story
               </h2>
-              <div className="prose prose-gray text-gray-600 text-sm leading-loose">
+              <div className="text-[var(--color-text-secondary)] text-md leading-loose space-y-4">
                 <p>
                   ArvestaDev was built around a simple idea: useful software should be accessible, easy to understand, and convenient to use. 
                 </p>
-                <p className="mt-4">
+                <p>
                   Often, completing a small digital task—like formatting a JSON file, analyzing keyword density, or converting an image—requires hunting down disparate websites, navigating cluttered interfaces, or downloading heavy desktop software. 
                 </p>
-                <p className="mt-4">
+                <p>
                   We wanted to change that by creating a unified platform containing practical, reliable web-based utilities that respect your time and workflow.
                 </p>
               </div>
             </section>
             
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-                <Cpu className="text-[#4F73F6]" /> What Is ArvestaDev?
+              <h2 className="text-2xl font-bold text-[var(--color-text-primary)] mb-6 flex items-center gap-3">
+                <Cpu className="text-[var(--color-primary)]" /> What Is ArvestaDev?
               </h2>
-              <div className="prose prose-gray text-gray-600 text-sm leading-loose">
+              <div className="text-[var(--color-text-secondary)] text-md leading-loose space-y-4">
                 <p>
                   ArvestaDev brings useful tools into one streamlined platform. We provide an ecosystem of online utilities across multiple categories, meaning you do not need to search across the internet to solve simple technical problems.
                 </p>
-                <p className="mt-4">
-                  From <Link href="/tools/developer" className="text-[#4F73F6] font-bold hover:underline">developer tools</Link> that format code, to <Link href="/tools/text" className="text-[#4F73F6] font-bold hover:underline">text utilities</Link> that analyze content, to <Link href="/tools/image" className="text-[#4F73F6] font-bold hover:underline">image converters</Link> that compress media, every tool is designed to load instantly and run efficiently directly within your web browser.
+                <p>
+                  From <Link href="/tools/developer" className="text-[var(--color-primary)] font-bold hover:underline">developer tools</Link> that format code, to <Link href="/tools/text" className="text-[var(--color-primary)] font-bold hover:underline">text utilities</Link> that analyze content, to <Link href="/tools/image" className="text-[var(--color-primary)] font-bold hover:underline">image converters</Link> that compress media, every tool is designed to load instantly and run efficiently directly within your web browser.
                 </p>
               </div>
             </section>
           </div>
 
-          {/* MISSION */}
-          <section className="bg-gray-900 text-white p-8 md:p-12 relative overflow-hidden">
-            {/* Subtle decorative accent */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[#4F73F6] opacity-10 translate-x-1/2 -translate-y-1/2"></div>
-            
-            <h2 className="text-sm font-bold text-[#ECBE13] uppercase tracking-widest mb-4">Our Mission</h2>
-            <p className="text-2xl md:text-3xl font-medium leading-relaxed max-w-2xl relative z-10">
-              Make useful digital tools simpler, faster, and more accessible for everyone.
-            </p>
-          </section>
+          {/* MISSION - Uses high-contrast inversion for modern dark/light compatibility */}
+        <section 
+  className="relative p-8 md:p-12 overflow-hidden bg-cover bg-center"
+  style={{ backgroundImage: "url('/mission.webp')" }}
+>
+<div className="absolute inset-0 bg-black/55 z-0"></div>
+  <div className="relative z-10 text-white">
+    <h2 className="text-sm font-bold text-[var(--color-warning)] uppercase tracking-widest mb-4">
+      Our Mission
+    </h2>
+    <p className="text-2xl md:text-3xl font-medium leading-relaxed max-w-2xl text-[var(--color-background)]">
+      Make useful digital tools simpler, faster, and more accessible for everyone.
+    </p>
+  </div>
+</section>
 
           {/* WHAT WE BELIEVE (Principles) */}
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-8 border-b border-gray-200 pb-4">What We Believe</h2>
+            <h2 className="text-2xl font-bold text-[var(--color-text-primary)] mb-8 border-b border-[var(--color-border)] pb-4">What We Believe</h2>
             <div className="grid md:grid-cols-2 gap-6">
               <PrincipleBlock 
                 icon={Zap}
@@ -166,23 +179,23 @@ export default function AboutPage() {
           </section>
 
           {/* CATEGORIES */}
-          <section className="bg-gray-100 p-8 md:p-12 -mx-4 md:mx-0 border-y md:border border-gray-200">
-            <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Explore Our Tools</h2>
+          <section className="bg-[var(--color-secondary)] p-8 md:p-12 -mx-4 md:mx-0">
+            <h2 className="text-2xl font-bold text-[var(--color-text-primary)] mb-8 text-center">Explore Our Tools</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <CategoryLink 
-                title="Developer Tools" 
+                title="Json Formatter" 
                 description="Format, validate, encode, and transform data." 
                 href="/explore" 
                 icon={Terminal} 
               />
               <CategoryLink 
-                title="Text Tools" 
+                title="Word Counter" 
                 description="Count, transform, clean, and analyze text." 
                 href="/explore" 
                 icon={FileText} 
               />
               <CategoryLink 
-                title="Image Tools" 
+                title="Image Formatter" 
                 description="Practical utilities for common image-related tasks." 
                 href="/explore" 
                 icon={ImageIcon} 
@@ -199,34 +212,34 @@ export default function AboutPage() {
           {/* WHO IS IT FOR & FUTURE VISION */}
           <div className="grid md:grid-cols-2 gap-12">
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 border-b border-gray-200 pb-4">Built for Everyone</h2>
-              <ul className="space-y-4 text-sm text-gray-600">
+              <h2 className="text-2xl font-bold text-[var(--color-text-primary)] mb-6 border-b border-[var(--color-border)] pb-4">Built for Everyone</h2>
+              <ul className="space-y-4 text-md text-[var(--color-text-secondary)]">
                 <li className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 bg-[#ECBE13] mt-1.5 shrink-0"></div>
-                  <span><strong>Developers</strong> streamlining their coding workflows.</span>
+                  <div className="w-1.5 h-1.5 bg-[var(--color-warning)] mt-1.5 shrink-0"></div>
+                  <span><strong className="text-[var(--color-text-primary)]">Developers</strong> streamlining their coding workflows.</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 bg-[#ECBE13] mt-1.5 shrink-0"></div>
-                  <span><strong>Writers & SEOs</strong> analyzing text and content density.</span>
+                  <div className="w-1.5 h-1.5 bg-[var(--color-warning)] mt-1.5 shrink-0"></div>
+                  <span><strong className="text-[var(--color-text-primary)]">Writers & SEOs</strong> analyzing text and content density.</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 bg-[#ECBE13] mt-1.5 shrink-0"></div>
-                  <span><strong>Designers</strong> quickly converting and resizing media.</span>
+                  <div className="w-1.5 h-1.5 bg-[var(--color-warning)] mt-1.5 shrink-0"></div>
+                  <span><strong className="text-[var(--color-text-primary)]">Designers</strong> quickly converting and resizing media.</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 bg-[#ECBE13] mt-1.5 shrink-0"></div>
-                  <span><strong>Everyday Users</strong> solving practical tasks without installing heavy desktop software.</span>
+                  <div className="w-1.5 h-1.5 bg-[var(--color-warning)] mt-1.5 shrink-0"></div>
+                  <span><strong className="text-[var(--color-text-primary)]">Everyday Users</strong> solving practical tasks without installing heavy desktop software.</span>
                 </li>
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 border-b border-gray-200 pb-4">What's Next?</h2>
-              <div className="text-gray-600 text-sm leading-loose">
+              <h2 className="text-2xl font-bold text-[var(--color-text-primary)] mb-6 border-b border-[var(--color-border)] pb-4">What's Next?</h2>
+              <div className="text-[var(--color-text-secondary)] text-md leading-loose space-y-4">
                 <p>
                   ArvestaDev is intended to be a continuously improving collection of digital tools. Our future vision includes expanding the tool collection, adding more advanced developer utilities, and integrating AI-powered features.
                 </p>
-                <p className="mt-4">
+                <p>
                   We are focused on bringing more useful, professional-grade workflows directly into the browser, making them accessible to anyone with an internet connection.
                 </p>
               </div>
@@ -236,25 +249,20 @@ export default function AboutPage() {
         </div>
 
         {/* CTA SECTION */}
-        <section className="bg-white border-t border-gray-200 py-20 px-4 text-center">
+        <section className="bg-[var(--color-surface)] border-t border-[var(--color-border)] py-20 px-4 text-center">
           <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Explore What ArvestaDev Can Do</h2>
-            <p className="text-gray-600 mb-8">
+            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] mb-4">Explore What ArvestaDev Can Do</h2>
+            <p className="text-[var(--color-text-secondary)] mb-8">
               Discover practical online tools designed to help you get things done faster.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link 
                 href="/explore" 
-                className="inline-flex justify-center items-center gap-2 bg-[#4F73F6] text-white font-bold px-8 py-3 hover:bg-blue-700 transition-colors rounded-none"
+                className="inline-flex justify-center items-center gap-2 bg-[var(--color-primary)] text-[var(--color-text-on-primary)] font-bold px-8 py-3 hover:bg-[var(--color-primary-hover)] transition-colors rounded-none"
               >
                 Explore Tools <ArrowRight size={18} />
               </Link>
-              <Link 
-                href="/contact" 
-                className="inline-flex justify-center items-center gap-2 bg-gray-100 text-gray-800 font-bold px-8 py-3 hover:bg-gray-200 transition-colors border border-gray-200 rounded-none"
-              >
-                Contact Us
-              </Link>
+           
             </div>
           </div>
         </section>
