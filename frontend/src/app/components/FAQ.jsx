@@ -62,12 +62,12 @@ export default function FAQ() {
                 onClick={() => toggleFAQ(index)}
                 className="flex w-full items-center justify-between px-6 py-5 text-left focus:outline-none"
               >
-                <span className="text-base font-semibold text-slate-900">
+                <span className="text-base font-semibold text-slate-900 cursor-pointer">
                   {faq.question}
                 </span>
                 
                 {/* Chevron Icon (Flips when open) */}
-                <span className={`ml-6 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-slate-50 transition-transform duration-300 ${openIndex === index ? "rotate-180 bg-blue-50 text-[#4F73F6]" : "text-slate-400"}`}>
+                <span className={`ml-6 flex h-7 w-7 flex-shrink-0 cursor-pointer items-center justify-center rounded-full bg-slate-50 transition-transform duration-300 ${openIndex === index ? "rotate-180 bg-blue-50 text-[#4F73F6]" : "text-slate-400"}`}>
                   <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                   </svg>

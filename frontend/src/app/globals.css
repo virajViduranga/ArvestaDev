@@ -1,8 +1,68 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand Colors */
+  --color-primary: #007acc;
+  --color-primary-hover: #0099cc;
+  --color-secondary: #F4F4F5;
+  --color-secondary-hover: #E4E4E7;
+  --color-accent: #265ed7;
+
+  /* Surfaces & Backgrounds */
+  --color-background: #FAFAFA;
+  --color-surface: #FFFFFF;
+  --color-surface-elevated: #FFFFFF;
+
+  /* Typography */
+  --color-text-primary: #18181B;
+  --color-text-secondary: #52525B;
+  --color-text-muted: #A1A1AA;
+  --color-text-on-primary: #FFFFFF;
+
+  /* Borders & Lines */
+  --color-border: #E4E4E7;
+  --color-border-hover: #D4D4D8;
+
+  /* Semantic / System */
+  --color-success: #10B981;
+  --color-success-bg: #ECFDF5;
+  --color-warning: #F59E0B;
+  --color-warning-bg: #FFFBEB;
+  --color-error: #E11D48;
+  --color-error-bg: #FFF1F2;
+  --color-info: #0EA5E9;
+  --color-info-bg: #F0F9FF;
+}
+
+/* Dark Mode Overrides */
+.dark,
+[data-theme="dark"] {
+  --color-primary: #818CF8;
+  --color-primary-hover: #6366F1;
+  --color-secondary: #27272A;
+  --color-secondary-hover: #3F3F46;
+  --color-accent: #818CF8;
+
+  --color-background: #09090B;
+  --color-surface: #18181B;
+  --color-surface-elevated: #27272A;
+
+  --color-text-primary: #FAFAFA;
+  --color-text-secondary: #A1A1AA;
+  --color-text-muted: #71717A;
+  --color-text-on-primary: #18181B;
+
+  --color-border: #27272A;
+  --color-border-hover: #3F3F46;
+
+  --color-success: #34D399;
+  --color-success-bg: rgba(16, 185, 129, 0.1);
+  --color-warning: #FBBF24;
+  --color-warning-bg: rgba(245, 158, 11, 0.1);
+  --color-error: #F43F5E;
+  --color-error-bg: rgba(225, 29, 72, 0.1);
+  --color-info: #38BDF8;
+  --color-info-bg: rgba(14, 165, 233, 0.1);
 }
 
 @theme inline {
