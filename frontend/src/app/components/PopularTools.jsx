@@ -71,59 +71,67 @@ const tools = [
 
 export default function PopularTools() {
   return (
-    <section className="bg-white py-16 px-6 lg:px-8">
+    <section className="bg-gray-50 py-16 px-6 lg:px-8 transition-colors duration-300">
       <div className="mx-auto max-w-7xl">
-        
+
         {/* Section Header */}
         <div className="text-center mb-12">
-          <span className="text-sm font-semibold tracking-wider uppercase text-[#4F73F6]">
+          <span className="text-sm font-semibold tracking-wider uppercase text-[var(--color-primary)]">
             Featured Utilities
           </span>
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl mt-2">
+          <h2 className="text-3xl font-bold tracking-tight text-[var(--color-text-primary)] sm:text-4xl mt-2">
             Popular Online Tools
           </h2>
-          <p className="mt-3 text-slate-600 text-base max-w-xl mx-auto">
+          <p className="mt-3 text-[var(--color-text-secondary)] text-base max-w-xl mx-auto">
             Choose from our most popular free tools designed to save you time.
           </p>
         </div>
 
         {/* 6-Card Responsive Grid */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {tools.map((tool) => (
-            <Link
-              key={tool.name}
-              href={tool.href}
-              className="group relative flex flex-col justify-between rounded-xl border border-slate-200 bg-slate-50/50 p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-[#4F73F6] hover:bg-white hover:shadow-md"
-            >
-              <div>
-                {/* Icon & Category Badge */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-50 transition-colors group-hover:bg-[#4F73F6]/10">
-                    {tool.icon}
-                  </div>
-                  <span className="rounded-full bg-slate-200/60 px-2.5 py-1 text-xs font-medium text-slate-600 group-hover:bg-[#ECBE13]/20 group-hover:text-amber-900 transition-colors">
-                    {tool.category}
-                  </span>
-                </div>
+      {tools.map((tool) => (
+  <Link
+    key={tool.name}
+    href={tool.href}
+    className="group relative flex flex-col rounded-2xl bg-[var(--color-surface)] p-6 border border-[var(--color-border)] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]"
+  >
+    {/* Clean Top Section: Subtle Icon & Category Pill */}
+    <div className="flex items-start justify-between mb-6">
+      
+      {/* Soft Icon Container */}
+      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--color-secondary)] text-[var(--color-text-primary)] transition-colors duration-300 group-hover:text-white">
+        {tool.icon}
+      </div>
 
-                {/* Card Title & Description */}
-                <h3 className="text-xl font-semibold text-slate-900 group-hover:text-[#4F73F6] transition-colors">
-                  {tool.name}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                  {tool.description}
-                </p>
-              </div>
+      {/* Minimal Category Pill */}
+      <span className="rounded-full bg-[var(--color-secondary)] px-3 py-1 text-[10px] font-medium tracking-wide text-[var(--color-text-secondary)] uppercase transition-colors duration-300 group-hover:bg-[var(--color-primary)] group-hover:text-white">
+        {tool.category}
+      </span>
+      
+    </div>
 
-              {/* Action Link / Arrow */}
-              <div className="mt-6 flex items-center text-sm font-medium text-[#4F73F6] group-hover:translate-x-1 transition-transform">
-                Open Tool
-                <svg className="ml-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </div>
-            </Link>
-          ))}
+    {/* Content Section */}
+    <div className="flex flex-col flex-1">
+      <h3 className="mb-2 text-lg font-semibold text-[var(--color-text-primary)] transition-colors duration-300 group-hover:text-[var(--color-primary)]">
+        {tool.name}
+      </h3>
+      
+      <p className="text-sm leading-relaxed text-[var(--color-text-secondary)] line-clamp-2">
+        {tool.description}
+      </p>
+    </div>
+
+    {/* Sharp Action Button */}
+    <div className="mt-8 flex justify-end">
+      <button className="flex items-center gap-2 rounded-none border border-[var(--color-border)] bg-transparent px-4 py-2 text-xs font-semibold text-[var(--color-text-primary)] transition-all duration-300 group-hover:border-[var(--color-primary)] group-hover:bg-[var(--color-primary)] group-hover:text-white cursor-pointer">
+        Open Tool
+        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </button>
+    </div>
+  </Link>
+))}
         </div>
 
       </div>

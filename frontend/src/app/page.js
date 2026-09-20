@@ -44,8 +44,12 @@ export default function Home() {
       />
 
       <Hero />
+     
       <PopularTools />
+     
+     
       <WhyArvestaDev />
+      
       <FAQ />
     </main>
   );
