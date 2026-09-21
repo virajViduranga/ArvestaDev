@@ -1,77 +1,57 @@
 import Link from "next/link";
+import { 
+  Terminal, FileText, Image as ImageIcon, 
+  FileImage, ImagePlus, Files
+} from 'lucide-react';
 
 const tools = [
+  {
+    name: "JSON Formatter",
+    description: "Format, validate, minify, and inspect JSON instantly in your browser.",
+    href: "/tools/json-formatter",
+    category: "Developer Tool",
+    cardColor: "#8045F5",
+    icon: <Terminal className="w-6 h-6 text-[#ffffff]" />,
+  },
+  {
+    name: "Word Counter",
+    description: "Advanced real-time word, character, and sentence counting with keyword analysis.",
+    href: "/tools/word-counter",
+    category: "Text Tool",
+    cardColor: "#455FF5",
+    icon: <FileText className="w-6 h-6 text-[#ffffff]" />,
+  },
   {
     name: "Image Compressor",
     description: "Compress JPG, PNG, and WebP images to smaller file sizes without quality loss.",
     href: "/tools/image-compressor",
     category: "Image Tool",
     cardColor: "#0AC756",
-    icon: (
-      <svg className="w-6 h-6 text-[#ffffff]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-      </svg>
-    ),
+    icon: <ImageIcon className="w-6 h-6 text-[#ffffff]" />,
   },
   {
-    name: "Image to PDF",
-    description: "Convert single or multiple image files into clean, shareable PDF documents.",
-    href: "/tools/image-to-pdf",
-    category: "PDF Tool",
-    cardColor: "#F2A60D",
-    icon: (
-      <svg className="w-6 h-6 text-[#ffffff]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-      </svg>
-    ),
-  },
-  {
-    name: "PDF Converter",
-    description: "Quickly convert PDF documents to and from various editable formats.",
-    href: "/tools/pdf-converter",
+    name: "PDF to Word",
+    description: "Convert PDFs into editable Word documents, preserving formatting.",
+    href: "/tools/pdf-to-word",
     category: "PDF Tool",
     cardColor: "#F2700D",
-    icon: (
-      <svg className="w-6 h-6 text-[#ffffff]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-      </svg>
-    ),
+    icon: <FileText className="w-6 h-6 text-[#ffffff]" />,
   },
   {
-    name: "Word Counter",
-    description: "Count words, characters, sentences, and estimate reading time in real time.",
-    href: "/tools/word-counter",
-    category: "Text Tool",
-    cardColor: "#455FF5",
-    icon: (
-      <svg className="w-6 h-6 text-[#ffffff]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-      </svg>
-    ),
+    name: "Word to PDF",
+    description: "Securely convert Word documents to PDF formatting. Supports batch processing.",
+    href: "/tools/word-to-pdf",
+    category: "PDF Tool",
+    cardColor: "#007acc",
+    icon: <FileText className="w-6 h-6 text-[#ffffff]" />,
   },
   {
-    name: "JSON Formatter",
-    description: "Validate, format, and beautify raw JSON data with clean indentation.",
-    href: "/tools/json-formatter",
-    category: "Developer Tool",
-    cardColor: "#8045F5",
-    icon: (
-      <svg className="w-6 h-6 text-[#ffffff]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-      </svg>
-    ),
-  },
-  {
-    name: "UUID Generator",
-    description: "Instantly create unique version 4 UUIDs (GUIDs) individually or in bulk.",
-    href: "/tools/uuid-generator",
-    category: "Developer Tool",
-    cardColor: "#F54577",
-    icon: (
-      <svg className="w-6 h-6 text-[#ffffff]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
-      </svg>
-    ),
+    name: "Merge PDF",
+    description: "Combine multiple PDFs into one document directly in your browser.",
+    href: "/tools/merge-pdf",
+    category: "PDF Tool",
+    cardColor: "#10B981",
+    icon: <Files className="w-6 h-6 text-[#ffffff]" />,
   },
 ];
 

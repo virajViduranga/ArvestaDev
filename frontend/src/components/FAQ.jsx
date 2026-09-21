@@ -30,8 +30,10 @@ const faqs = [
   }
 ];
 
-export default function FAQ() {
+export default function FAQ({ faqs: customFaqs }) {
   const [openIndex, setOpenIndex] = useState(null);
+
+  const displayFaqs = customFaqs || faqs;
 
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -53,7 +55,7 @@ export default function FAQ() {
 
         {/* FAQ Accordion */}
         <div className="space-y-4">
-          {faqs.map((faq, index) => (
+          {displayFaqs.map((faq, index) => (
             <div 
               key={index} 
               className="border border-slate-200 bg-white rounded-xl overflow-hidden transition-all duration-200 hover:border-[#4F73F6]/50"

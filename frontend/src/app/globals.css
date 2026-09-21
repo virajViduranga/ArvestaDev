@@ -3,10 +3,10 @@
 :root {
   /* Brand Colors */
   --color-primary: #007acc;
-  --color-primary-hover: #0099cc;
+  --color-primary-hover: #1aa3ff;
   --color-secondary: #F4F4F5;
   --color-secondary-hover: #E4E4E7;
-  --color-accent: #265ed7;
+  --color-accent: #004766;
 
   /* Surfaces & Backgrounds */
   --color-background: #FAFAFA;
@@ -37,11 +37,11 @@
 /* Dark Mode Overrides */
 .dark,
 [data-theme="dark"] {
-  --color-primary: #818CF8;
-  --color-primary-hover: #6366F1;
-  --color-secondary: #27272A;
-  --color-secondary-hover: #3F3F46;
-  --color-accent: #818CF8;
+  --color-primary: #3399ff;
+  --color-primary-hover: #66b3ff;
+  --color-secondary: #18181b;
+  --color-secondary-hover: #27272a;
+  --color-accent: #66c2ff;
 
   --color-background: #09090B;
   --color-surface: #18181B;
