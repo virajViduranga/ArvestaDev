@@ -4,6 +4,7 @@ import { useState } from 'react';
 import FileDropzone from '@/components/FileDropzone';
 import PrivacyNotice from '@/components/PrivacyNotice';
 import { mergePdfsLocal } from '@/utils/pdfEngine';
+import ToolSeoSection from '@/components/ToolSeoSection';
 import SortableFileList from '@/components/SortableFileList';
 import { ArrowLeft,  FileText, X, Download, Loader2  } from 'lucide-react';
 
@@ -105,7 +106,38 @@ export default function MergePdfPage() {
           </div>
         )}
 
-        <PrivacyNotice />
+        <PrivacyNotice type="local" />
+
+        <ToolSeoSection 
+          steps={[
+            {
+              title: "Upload PDF Files",
+              description: "Select or drag and drop two or more PDF documents you want to combine."
+            },
+            {
+              title: "Arrange Order",
+              description: "Drag the files to arrange them in the exact order you want them to appear in the final PDF."
+            },
+            {
+              title: "Merge and Download",
+              description: "Click merge to securely combine your PDFs into a single document instantly."
+            }
+          ]}
+          faqs={[
+            {
+              question: "Is it secure to merge my sensitive PDFs here?",
+              answer: "Yes! Our tool processes all PDF merging locally in your web browser. Your files are never uploaded to external servers, ensuring your sensitive data remains completely private."
+            },
+            {
+              question: "Is there a limit on the number of PDFs I can merge?",
+              answer: "You can merge multiple PDFs at once. Since the processing happens entirely on your device, the practical limit depends entirely on your device's memory."
+            },
+            {
+              question: "Will the original quality be maintained?",
+              answer: "Absolutely. The tool combines the PDF files directly without compressing or altering their contents, ensuring that the original text, images, and formatting are perfectly preserved."
+            }
+          ]}
+        />
       </div>
     </main>
   );
