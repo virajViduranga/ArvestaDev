@@ -7,21 +7,43 @@ export default function FileDropzone({ onFilesSelected, accept, maxSizeMB = 50, 
   const [error, setError] = useState(null);
   const fileInputRef = useRef(null);
 
-  const validateAndProcessFiles = (files) => {
+const validateAndProcessFiles = (files) => {
     setError(null);
     const validFiles = [];
     const maxSizeBytes = maxSizeMB * 1024 * 1024;
 
     for (let file of files) {
+      // 1. Check File Size
       if (file.size > maxSizeBytes) {
         setError(`"${file.name}" is too large. Maximum size is ${maxSizeMB}MB.`);
         return;
       }
-      // Simple type validation based on 'accept' string (e.g., "application/pdf" or "image/jpeg")
-      if (accept && !file.type.match(accept.replace('*', '.*'))) {
-        setError(`"${file.name}" is not a supported file type.`);
-        return;
+      
+      // 2. Check File Type (The Fix)
+      if (accept) {
+        const acceptedTypes = accept.split(',').map(type => type.trim().toLowerCase());
+        const fileType = file.type.toLowerCase();
+        const fileName = file.name.toLowerCase();
+
+        const isSupported = acceptedTypes.some(type => {
+          if (type.startsWith('.')) {
+            // Checks extensions (e.g., .jpeg, .docx)
+            return fileName.endsWith(type);
+          } else if (type.endsWith('/*')) {
+            // Checks wildcards (e.g., image/*)
+            return fileType.startsWith(type.replace('/*', ''));
+          } else {
+            // Checks exact MIME types (e.g., image/jpeg)
+            return fileType === type;
+          }
+        });
+
+        if (!isSupported) {
+          setError(`"${file.name}" is not a supported file type.`);
+          return;
+        }
       }
+      
       validFiles.push(file);
     }
     
