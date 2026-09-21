@@ -3,6 +3,7 @@ import { useState } from 'react';
 import FileDropzone from '@/components/FileDropzone';
 import PrivacyNotice from '@/components/PrivacyNotice';
 import { mergePdfsLocal } from '@/utils/pdfEngine';
+import SortableFileList from '@/components/ui/SortableFileList';
 import { FileText, X, Download, Loader2 } from 'lucide-react';
 
 export default function MergePdfPage() {
@@ -46,20 +47,12 @@ export default function MergePdfPage() {
             {files.length > 0 && (
               <div className="mt-8 bg-surface rounded-xl border border-border p-6 shadow-sm">
                 <h3 className="font-semibold text-text-primary mb-4">Selected Files ({files.length})</h3>
-                <ul className="space-y-2 mb-6">
-                  {files.map((file, i) => (
-                    <li key={i} className="flex items-center justify-between p-3 bg-background border border-border rounded-lg">
-                      <div className="flex items-center">
-                        <FileText className="w-5 h-5 text-primary mr-3" />
-                        <span className="text-text-primary font-medium">{file.name}</span>
-                        <span className="text-text-muted text-sm ml-3">{(file.size / 1024 / 1024).toFixed(2)} MB</span>
-                      </div>
-                      <button onClick={() => removeFile(i)} className="text-text-muted hover:text-error p-1" aria-label="Remove file">
-                        <X className="w-5 h-5" />
-                      </button>
-                    </li>
-                  ))}
-                </ul>
+              <SortableFileList 
+                  files={files} 
+                  setFiles={setFiles} 
+                  onRemove={removeFile} 
+                  iconType="file" 
+                />
                 
                 <button 
                   onClick={handleMerge}
