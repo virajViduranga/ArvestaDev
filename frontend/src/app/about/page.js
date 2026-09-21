@@ -85,7 +85,6 @@ const ToolCard = ({ title, description, href, icon: Icon, cardColor }) => (
     <div className="mt-8 flex justify-end">
       <button className="flex items-center gap-2 rounded-none border border-[var(--color-border)] bg-transparent px-4 py-2 text-xs font-semibold text-[var(--color-text-primary)] transition-all duration-300 group-hover:border-[var(--card-color)] group-hover:bg-[var(--card-color)] group-hover:text-white cursor-pointer">
         Open Tool
-        <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
       </button>
     </div>
   </Link>
@@ -155,19 +154,19 @@ export default function AboutPage() {
 
           {/* MISSION - Uses high-contrast inversion for modern dark/light compatibility */}
         <section 
-  className="relative p-8 md:p-12 overflow-hidden bg-cover bg-center"
-  style={{ backgroundImage: "url('/mission.webp')" }}
->
-<div className="absolute inset-0 bg-black/55 z-0"></div>
-  <div className="relative z-10 text-white">
-    <h2 className="text-sm font-bold text-[var(--color-warning)] uppercase tracking-widest mb-4">
-      Our Mission
-    </h2>
-    <p className="text-2xl md:text-3xl font-medium leading-relaxed max-w-2xl text-[var(--color-background)]">
-      Make useful digital tools simpler, faster, and more accessible for everyone.
-    </p>
-  </div>
-</section>
+          className="relative p-8 md:p-12 overflow-hidden bg-cover bg-center"
+          style={{ backgroundImage: "url('/mission.webp')" }}
+        >
+        <div className="absolute inset-0 bg-black/55 z-0"></div>
+          <div className="relative z-10 text-white">
+            <h2 className="text-sm font-bold text-[var(--color-warning)] uppercase tracking-widest mb-4">
+              Our Mission
+            </h2>
+            <p className="text-2xl md:text-3xl font-medium leading-relaxed max-w-2xl text-[var(--color-background)]">
+              Make useful digital tools simpler, faster, and more accessible for everyone.
+            </p>
+          </div>
+        </section>
 
           {/* WHAT WE BELIEVE (Principles) */}
           <section>

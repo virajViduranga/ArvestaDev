@@ -123,9 +123,6 @@ export default function ExploreToolsClient() {
               <div className="mt-8 flex justify-end">
                 <button className="flex items-center gap-2 rounded-none border border-[var(--color-border)] bg-transparent px-4 py-2 text-xs font-semibold text-[var(--color-text-primary)] transition-all duration-300 group-hover:border-[var(--card-color)] group-hover:bg-[var(--card-color)] group-hover:text-white cursor-pointer">
                   Open Tool
-                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
                 </button>
               </div>
             </Link>
@@ -133,7 +130,8 @@ export default function ExploreToolsClient() {
         </div>
 
         {/* SEO Content Section (Bottom of page) */}
-        <section className="mt-24 bg-[var(--color-surface)] border-t-4 border-[var(--color-primary)] p-8 md:p-12 shadow-sm">
+        <section className="mt-24 bg-cover bg-center border-l-4 border-[var(--color-primary)] p-8 md:p-12 shadow-sm"
+        style={{ backgroundImage: "url('/explore.webp')" }}>
           <div className="max-w-4xl">
             <h2 className="text-2xl font-bold text-[var(--color-text-primary)] mb-6">Free Online Tools for Everyday Tasks</h2>
             <div className="space-y-6 text-[var(--color-text-secondary)] leading-relaxed">
