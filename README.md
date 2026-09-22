@@ -1,4 +1,5 @@
 ArvestaDev Web Utility Platform
+
 A high-performance, privacy-first PDF and web utility platform. This project utilizes a hybrid architecture: lightweight operations run entirely in the browser using WebAssembly and client-side JavaScript, while heavy document conversions are routed to an isolated Express.js backend.
 
 Features
