@@ -57,7 +57,7 @@ export default function PdfToWordPage() {
       >
         <ArrowLeft className="w-8 h-8" />
       </button>
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-[var(--color-text-primary)] text-center mb-2">PDF to Word</h1>
         <p className="text-[var(--color-text-secondary)] text-center mb-10">Convert PDFs into editable Word documents, preserving formatting.</p>
 
