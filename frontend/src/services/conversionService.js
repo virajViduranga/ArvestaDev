@@ -1,11 +1,27 @@
-import { mergePdfsLocal, imagesToPdfLocal, pdfToJpgLocal } from '../utils/pdfEngine';
+import {
+  mergePdfsLocal,
+  imagesToPdfLocal,
+  pdfToJpgLocal,
+} from "../utils/pdfEngine";
+
+// Use an environment variable for production, fallback to localhost for development
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
 
 class ConversionService {
   async processJob(file, operation, options = {}) {
     // 1. Route to Local Engines if supported
-    if (operation === 'merge') return await mergePdfsLocal(file);
-    if (operation === 'jpg-to-pdf') return await imagesToPdfLocal(file);
-    if (operation === 'pdf-to-jpg') return await pdfToJpgLocal(file, options);
+    if (operation === "merge") {
+      const blob = await mergePdfsLocal(file);
+      return { downloadUrl: URL.createObjectURL(blob) };
+    }
+    if (operation === "jpg-to-pdf") {
+      const blob = await imagesToPdfLocal(file);
+      return { downloadUrl: URL.createObjectURL(blob) };
+    }
+    if (operation === "pdf-to-jpg") {
+      const blob = await pdfToJpgLocal(file, options);
+      return { downloadUrl: URL.createObjectURL(blob) };
+    }
 
     // 2. Route to Server-side Engines (PDF to Word/Excel/PPT, OCR)
     return await this.serverConverter(file, operation, options);
@@ -13,58 +29,53 @@ class ConversionService {
 
   async serverConverter(file, operation, options) {
     const formData = new FormData();
-    formData.append('file', file);
-    formData.append('operation', operation);
-    if (options.ocr) formData.append('ocr', 'true');
-    if (options.ocrLanguage) formData.append('language', options.ocrLanguage);
-    if (options.pageRange) formData.append('pageRange', options.pageRange);
+    formData.append("file", file);
+    formData.append("operation", operation);
+    
+    // Support both naming conventions from the UI
+    if (options.ocr || options.useOcr) formData.append("ocr", "true");
+    if (options.ocrLanguage) formData.append("language", options.ocrLanguage);
+    if (options.pageRange) formData.append("pageRange", options.pageRange);
 
-    // Architecture: Post to Next.js API route which handles queuing (implemented in Step 3)
-    const response = await fetch('/api/convert', {
-      method: 'POST',
+    const response = await fetch(`${API_BASE_URL}/api/convert`, {
+      method: "POST",
       body: formData,
     });
-
+    
     if (!response.ok) {
-      const err = await response.json();
-      throw new Error(err.message || 'Server conversion failed.');
+      // Safely handle 502/504 Bad Gateway HTML errors if the server drops
+      const err = await response.json().catch(() => ({ error: "Backend server is unreachable." }));
+      throw new Error(err.error || "Server conversion failed.");
     }
-
-    // Architecture expects a job ID for polling (queue system)
+    
     const { jobId } = await response.json();
     return await this.pollJobStatus(jobId);
   }
 
-async pollJobStatus(jobId) {
+  async pollJobStatus(jobId) {
     return new Promise((resolve, reject) => {
       const interval = setInterval(async () => {
         try {
-          const res = await fetch(`/api/jobs/${jobId}`);
-          
-          // 1. If the server crashes or returns a 404/500, stop polling
+          const res = await fetch(`${API_BASE_URL}/api/jobs/${jobId}`);
           if (!res.ok) {
             clearInterval(interval);
             return reject(new Error(`Server error: ${res.statusText}`));
           }
-
-          const data = await res.json();
           
-          if (data.status === 'completed') {
+          const data = await res.json();
+          if (data.status === "completed") {
             clearInterval(interval);
             resolve({
-              downloadUrl: data.downloadUrl,
-              warnings: data.warnings
+              downloadUrl: `${API_BASE_URL}${data.downloadUrl}`,
+              warnings: data.warnings,
             });
-          } else if (data.status === 'failed') {
+          } else if (data.status === "failed") {
             clearInterval(interval);
-            reject(new Error(data.error || 'Job failed on the server.'));
+            reject(new Error(data.error || "Job failed on the server."));
           }
-          // If status is 'processing', it just loops again in 2 seconds.
-          
         } catch (error) {
-          // 2. If the network completely drops or JSON parsing fails, stop polling
           clearInterval(interval);
-          reject(new Error('Failed to communicate with the server.'));
+          reject(new Error("Failed to communicate with the server."));
         }
       }, 2000);
     });
@@ -73,23 +84,46 @@ async pollJobStatus(jobId) {
   async processBatch(files, operation, options = {}, onProgressUpdate) {
     const results = [];
     
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      // Notify UI that this specific file started
-      onProgressUpdate({ index: i, id: file.name, status: 'processing' });
-      
+    // For merge, we pass the entire array at once, not individually
+    if (operation === "merge" || operation === "jpg-to-pdf") {
+      onProgressUpdate({ index: 0, id: "batch", status: "processing" });
       try {
-        const res = await this.processJob(file, operation, options);
-        // Notify UI of success
-        onProgressUpdate({ index: i, id: file.name, status: 'success', url: res.downloadUrl });
-        results.push({ file: file.name, status: 'success', url: res.downloadUrl });
+        const res = await this.processJob(files, operation, options);
+        onProgressUpdate({ index: 0, id: "batch", status: "success", url: res.downloadUrl });
+        return [{ file: "batch", status: "success", url: res.downloadUrl }];
       } catch (err) {
-        // Notify UI of failure, but continue the loop for the rest of the files
-        onProgressUpdate({ index: i, id: file.name, status: 'failed', error: err.message });
-        results.push({ file: file.name, status: 'failed', error: err.message });
+        onProgressUpdate({ index: 0, id: "batch", status: "failed", error: err.message });
+        return [{ file: "batch", status: "failed", error: err.message }];
       }
     }
-    
+
+    // For server conversions, process individually
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      onProgressUpdate({ index: i, id: file.name, status: "processing" });
+      try {
+        const res = await this.processJob(file, operation, options);
+        onProgressUpdate({
+          index: i,
+          id: file.name,
+          status: "success",
+          url: res.downloadUrl,
+        });
+        results.push({
+          file: file.name,
+          status: "success",
+          url: res.downloadUrl,
+        });
+      } catch (err) {
+        onProgressUpdate({
+          index: i,
+          id: file.name,
+          status: "failed",
+          error: err.message,
+        });
+        results.push({ file: file.name, status: "failed", error: err.message });
+      }
+    }
     return results;
   }
 }
