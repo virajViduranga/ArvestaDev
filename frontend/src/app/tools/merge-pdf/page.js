@@ -46,7 +46,7 @@ export default function MergePdfPage() {
       >
         <ArrowLeft className="w-8 h-8" />
       </button>
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold text-[var(--color-text-primary)] text-center mb-2">Merge PDF Files</h1>
         <p className="text-[var(--color-text-secondary)] text-center mb-10">Combine multiple PDFs into one document directly in your browser.</p>
 

@@ -12,6 +12,8 @@ const { promisify } = require('util');
 const execAsync = promisify(exec);
 const app = express();
 
+const PORT = process.env.PORT || 8080;
+
 // Allow your Cloudflare frontend to access this API
 app.use(cors({ origin: ['http://localhost:3000', 'https://arvestadev.com'] }));
 
@@ -132,6 +134,7 @@ app.get('/api/download/:id', async (req, res) => {
   }
 });
 
-app.listen(8080, () => {
-  console.log('PDF Conversion API running on port 8080');
+
+app.listen(PORT, () => {
+  console.log(`PDF Conversion API running on port ${PORT}`);
 });

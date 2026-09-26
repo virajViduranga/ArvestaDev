@@ -60,38 +60,38 @@ export default function FileDropzone({ onFilesSelected, accept, maxSizeMB = 50, 
     }
   };
 
-  return (
-    <div className="w-full max-w-8xl mx-auto">
-      <div
-        onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
-        onDragLeave={() => setIsDragging(false)}
-        onDrop={handleDrop}
-        onClick={() => fileInputRef.current?.click()}
-        className={`border-2 border-dashed rounded-xl p-10 text-center cursor-pointer transition-colors
-          ${isDragging ? 'border-[var(--color-primary)] bg-[var(--color-secondary)]' : 'border-[var(--color-border)] hover:border-[var(--color-primary)]'}`}
-        tabIndex="0"
-        onKeyDown={(e) => e.key === 'Enter' && fileInputRef.current?.click()}
-      >
-        <UploadCloud className="w-12 h-12 text-[var(--color-primary)] mx-auto mb-4" />
-        <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-2">Drag & drop your files here</h3>
-        <p className="text-[var(--color-text-secondary)] mb-4">or click to browse your device</p>
-        <p className="text-[var(--color-text-muted)] text-sm">Maximum file size: {maxSizeMB} MB</p>
+ return (
+  <div className="w-full h-screen p-4 flex flex-col">
+    <div
+      onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+      onDragLeave={() => setIsDragging(false)}
+      onDrop={handleDrop}
+      onClick={() => fileInputRef.current?.click()}
+      className={`flex-1 flex flex-col items-center justify-center w-full h-full border-2 border-dashed rounded-xl p-10 text-center cursor-pointer transition-colors
+        ${isDragging ? 'border-[var(--color-primary)] bg-[var(--color-secondary)]' : 'border-[var(--color-border)] hover:border-[var(--color-primary)]'}`}
+      tabIndex="0"
+      onKeyDown={(e) => e.key === 'Enter' && fileInputRef.current?.click()}
+    >
+      <UploadCloud className="w-16 h-16 text-[var(--color-primary)] mx-auto mb-6" />
+      <h3 className="text-3xl font-semibold text-[var(--color-text-primary)] mb-4">Drag & drop your files here</h3>
+      <p className="text-lg text-[var(--color-text-secondary)] mb-6">or click to browse your device</p>
+      <p className="text-[var(--color-text-muted)] text-base">Maximum file size: {maxSizeMB} MB</p>
 
-        <input
-          type="file"
-          ref={fileInputRef}
-          onChange={(e) => validateAndProcessFiles(Array.from(e.target.files))}
-          accept={accept}
-          multiple={multiple}
-          className="hidden"
-        />
-      </div>
-
-      {error && (
-        <div className="mt-4 p-4 bg-[var(--color-error-bg)] text-[var(--color-error)] rounded-lg text-sm flex items-center">
-          <span className="font-semibold mr-2">Error:</span> {error}
-        </div>
-      )}
+      <input
+        type="file"
+        ref={fileInputRef}
+        onChange={(e) => validateAndProcessFiles(Array.from(e.target.files))}
+        accept={accept}
+        multiple={multiple}
+        className="hidden"
+      />
     </div>
-  );
+
+    {error && (
+      <div className="mt-4 p-4 bg-[var(--color-error-bg)] text-[var(--color-error)] rounded-lg text-base flex items-center shrink-0">
+        <span className="font-semibold mr-2">Error:</span> {error}
+      </div>
+    )}
+  </div>
+);
 }
