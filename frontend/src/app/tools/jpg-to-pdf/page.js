@@ -46,7 +46,7 @@ export default function JpgToPdfPage() {
       >
         <ArrowLeft className="w-8 h-8" />
       </button>
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold text-[var(--color-text-primary)] text-center mb-2">JPG to PDF</h1>
         <p className="text-[var(--color-text-secondary)] text-center mb-10">Convert multiple JPG or PNG images into a single PDF document.</p>
 

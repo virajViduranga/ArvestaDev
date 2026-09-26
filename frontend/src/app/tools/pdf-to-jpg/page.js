@@ -42,7 +42,7 @@ export default function PdfToJpgPage() {
       >
         <ArrowLeft className="w-8 h-8" />
       </button>
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold text-[var(--color-text-primary)] text-center mb-2">PDF to JPG</h1>
         <p className="text-[var(--color-text-secondary)] text-center mb-10">Extract every page of your PDF into high-quality JPG images.</p>
 
