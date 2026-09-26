@@ -6,7 +6,7 @@ import PrivacyNotice from '@/components/PrivacyNotice';
 import { mergePdfsLocal } from '@/utils/pdfEngine';
 import ToolSeoSection from '@/components/ToolSeoSection';
 import SortableFileList from '@/components/SortableFileList';
-import { ArrowLeft,  FileText, X, Download, Loader2  } from 'lucide-react';
+import { ArrowLeft, FileText, X, Download, Loader2 } from 'lucide-react';
 
 export default function MergePdfPage() {
   const router = useRouter();
@@ -25,7 +25,7 @@ export default function MergePdfPage() {
   const handleMerge = async () => {
     if (files.length < 2) return;
     setStatus('processing');
-    
+
     try {
       const mergedBlob = await mergePdfsLocal(files);
       const url = URL.createObjectURL(mergedBlob);
@@ -39,8 +39,8 @@ export default function MergePdfPage() {
 
   return (
     <main className="min-h-screen bg-[var(--color-background)] transition-colors duration-200 py-12 px-4 relative">
-      <button 
-        onClick={() => router.back()} 
+      <button
+        onClick={() => router.back()}
         className="absolute top-6 left-8 md:left-16 lg:left-32 p-2 text-white bg-[var(--color-primary-hover)] hover:bg-white hover:text-[var(--color-primary-hover)] transition-all duration-200 rounded-full cursor-pointer shadow-sm hover:shadow-md"
         aria-label="Go back"
       >
@@ -53,18 +53,18 @@ export default function MergePdfPage() {
         {status === 'idle' && (
           <>
             <FileDropzone onFilesSelected={handleFiles} accept="application/pdf" multiple={true} />
-            
+
             {files.length > 0 && (
               <div className="mt-8 bg-[var(--color-surface)] rounded-xl border border-[var(--color-border)] p-6 shadow-sm">
                 <h3 className="font-semibold text-[var(--color-text-primary)] mb-4">Selected Files ({files.length})</h3>
-              <SortableFileList 
-                  files={files} 
-                  setFiles={setFiles} 
-                  onRemove={removeFile} 
-                  iconType="file" 
+                <SortableFileList
+                  files={files}
+                  setFiles={setFiles}
+                  onRemove={removeFile}
+                  iconType="file"
                 />
-                
-                <button 
+
+                <button
                   onClick={handleMerge}
                   disabled={files.length < 2}
                   className="w-full py-3 bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-[var(--color-text-on-primary)] rounded-lg font-semibold disabled:opacity-50 transition-colors"
@@ -89,15 +89,15 @@ export default function MergePdfPage() {
             <div className="w-16 h-16 bg-[var(--color-success-bg)] text-[var(--color-success)] rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">✓</div>
             <h2 className="text-2xl font-bold text-[var(--color-text-primary)] mb-2">Done!</h2>
             <p className="text-[var(--color-text-secondary)] mb-8">Your PDFs have been successfully merged.</p>
-            
-            <a 
-              href={resultUrl} 
+
+            <a
+              href={resultUrl}
               download="merged-document.pdf"
               className="inline-flex items-center px-8 py-3 bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-[var(--color-text-on-primary)] rounded-lg font-semibold text-lg transition-colors"
             >
               <Download className="w-5 h-5 mr-2" /> Download Merged PDF
             </a>
-            
+
             <div className="mt-6">
               <button onClick={() => { setStatus('idle'); setFiles([]); }} className="text-[var(--color-primary)] hover:underline">
                 Merge more files
@@ -108,7 +108,7 @@ export default function MergePdfPage() {
 
         <PrivacyNotice type="local" />
 
-        <ToolSeoSection 
+        <ToolSeoSection
           steps={[
             {
               title: "Upload PDF Files",
