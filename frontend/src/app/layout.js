@@ -44,17 +44,48 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://arvestadev.com/#person",
+        "name": "I P Viraj Viduranga",
+        "alternateName": "Viraj Viduranga",
+        "jobTitle": "Full Stack Developer",
+        "url": "https://arvestadev.com",
+        "sameAs": [
+          "https://www.linkedin.com/in/viraj-viduranga-9b5086344",
+          "https://github.com/virajViduranga"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://arvestadev.com/#website",
+        "url": "https://arvestadev.com",
+        "name": "ArvestaDev",
+        "publisher": {
+          "@id": "https://arvestadev.com/#person"
+        }
+      }
+    ]
+  };
+
   return (
    <html lang="en">
-      {/* We add min-h-screen flex flex-col so the footer always sticks to the bottom */}
       <body className={`${poppins.className} min-h-screen flex flex-col antialiased`}>
         
-      <Navbar />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         
-        {/* This is where your page content loads */}
+        <Navbar />
+        
         <main className="flex-grow">
           {children}
         </main>
+        
         <Footer />
         
       </body>
