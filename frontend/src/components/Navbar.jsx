@@ -74,12 +74,12 @@ export default function Navbar() {
 
       {/* Mobile Menu Dropdown Panel */}
       {isOpen && (
-        <div className="md:hidden border-t border-[var(--color-border)] bg-[var(--color-surface-elevated)] shadow-lg absolute w-full">
+        <div className="md:hidden border-t border-[var(--color-border)] bg-[var(--color-surface-elevated)] shadow-lg absolute  w-full">
           <div className="space-y-1 px-4 pb-6 pt-2">
             <Link href="/" onClick={() => setIsOpen(false)} className="block rounded-md px-3 py-3 text-base font-medium text-[var(--color-text-secondary)] hover:bg-[var(--color-secondary)] hover:text-[var(--color-primary)] transition-colors">
               Home
             </Link>
-            <Link href="/tools" onClick={() => setIsOpen(false)} className="block rounded-md px-3 py-3 text-base font-medium text-[var(--color-text-secondary)] hover:bg-[var(--color-secondary)] hover:text-[var(--color-primary)] transition-colors">
+            <Link href="/explore" onClick={() => setIsOpen(false)} className="block rounded-md px-3 py-3 text-base font-medium text-[var(--color-text-secondary)] hover:bg-[var(--color-secondary)] hover:text-[var(--color-primary)] transition-colors">
               All Tools
             </Link>
             <Link href="/about" onClick={() => setIsOpen(false)} className="block rounded-md px-3 py-3 text-base font-medium text-[var(--color-text-secondary)] hover:bg-[var(--color-secondary)] hover:text-[var(--color-primary)] transition-colors">
