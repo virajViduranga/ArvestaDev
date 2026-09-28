@@ -138,14 +138,6 @@ export default function PdfToWordPage() {
             >
               <Download className="w-5 h-5 mr-2" /> Download Word Document
             </a>
-             <div className="mt-8 text-center">
-                <button 
-                  onClick={handleFileSelect}
-                  className="text-[var(--color-primary)] hover:underline font-medium cursor-pointer"
-                >
-                  Convert more files
-                </button>
-              </div>
           </div>
          
              
