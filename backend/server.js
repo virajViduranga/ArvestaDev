@@ -15,7 +15,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 // Allow your Cloudflare frontend to access this API
-app.use(cors({ origin: ['http://localhost:3000', 'https://arvestadev.com'] }));
+app.use(cors({ origin: ['http://localhost:3000', 'https://arvestadev.com','https://www.arvestadev.com'] }));
 
 // --- SECURITY & LIMITS ---
 const rateLimitCache = new Map();
