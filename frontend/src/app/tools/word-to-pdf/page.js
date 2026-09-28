@@ -70,7 +70,7 @@ export default function WordToPdfPage() {
               <div className="mt-8 text-center">
                 <button 
                   onClick={() => setBatchFiles([])}
-                  className="text-[var(--color-primary)] hover:underline font-medium"
+                  className="text-[var(--color-primary)] hover:underline font-medium cursor-pointer"
                 >
                   Convert more files
                 </button>
