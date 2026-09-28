@@ -140,7 +140,7 @@ export default function PdfToWordPage() {
             </a>
              <div className="mt-8 text-center">
                 <button 
-                  onClick={handleConvert}
+                  onClick={handleFileSelect}
                   className="text-[var(--color-primary)] hover:underline font-medium cursor-pointer"
                 >
                   Convert more files
