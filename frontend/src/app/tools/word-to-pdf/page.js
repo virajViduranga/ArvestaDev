@@ -7,29 +7,55 @@ import PrivacyNotice from '@/components/PrivacyNotice';
 import BatchList from '@/components/BatchList';
 import { conversionService } from '@/services/conversionService';
 import ToolSeoSection from '@/components/ToolSeoSection';
+
 export default function WordToPdfPage() {
   const router = useRouter();
-  // Batch state holds objects: { name, status, url, error }
   const [batchFiles, setBatchFiles] = useState([]);
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleFiles = async (selectedFiles) => {
-    // Initialize batch UI state
+    // Initialize batch UI state with progress properties
     const initialBatch = selectedFiles.map(f => ({ 
       name: f.name, 
       status: 'waiting', 
+      progress: 0,
       url: null, 
       error: null 
     }));
     setBatchFiles(initialBatch);
     setIsProcessing(true);
 
-    // Process using the service and pass a callback to update UI per file
+    // 1. Start a fake progress timer for every file in the batch
+    const progressIntervals = selectedFiles.map((_, index) => {
+      return setInterval(() => {
+        setBatchFiles((prev) => {
+          const newBatch = [...prev];
+          const currentProgress = newBatch[index].progress || 0;
+          
+          // Only increment if the service has moved it to 'processing' status
+          if (newBatch[index].status === 'processing' && currentProgress < 90) {
+            newBatch[index] = { ...newBatch[index], progress: currentProgress + 5 };
+            return newBatch;
+          }
+          return prev; // Do nothing if waiting, success, or failed
+        });
+      }, 500);
+    });
+
+    // 2. Process using your existing, working conversionService
     await conversionService.processBatch(
       selectedFiles, 
       'word-to-pdf', 
       {}, 
       (update) => {
+        // 3. Clear the timer for this specific file when it finishes or fails
+        if (update.status === 'success' || update.status === 'failed') {
+          clearInterval(progressIntervals[update.index]);
+          if (update.status === 'success') {
+            update.progress = 100; // Jump to 100% on success
+          }
+        }
+
         setBatchFiles(prev => {
           const newBatch = [...prev];
           newBatch[update.index] = { ...newBatch[update.index], ...update };
